@@ -1,0 +1,2 @@
+class GymList < ApplicationRecord
+end

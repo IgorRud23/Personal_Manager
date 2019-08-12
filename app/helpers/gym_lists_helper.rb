@@ -1,0 +1,2 @@
+module GymListsHelper
+end
