@@ -8,7 +8,7 @@ class GymList < ApplicationRecord
       {name: "gym_name", location: "gym_address" },
       {name: "gym_name", location: "gym_address" },
       {name: "gym_name", location: "gym_address" },
-      ....
+      
     ]
     #propisaty spisok do kincya
     #viklikaty za dopomogoyu GymList.gym_locations - poverne ves' spisok

@@ -1,0 +1,8 @@
+<h1>Welcome <%= @user.email %></h1>
+<br>
+<h3><%= link_to "My Clients", user_clients_path(@user) %></h3>
+<br>
+<h3><%= link_to "My Schedule", user_schedules_path(@user) %></h3>
+<br>
+<h3><%= link_to "Gyms List", gym_list_path %></h3>
+<br>

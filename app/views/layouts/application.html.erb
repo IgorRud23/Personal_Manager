@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
   <head>
-    <title>PersonalManager</title>
+    <meta charset="utf-8">
+    
+    <title>Personal Manager</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +12,29 @@
   </head>
 
   <body>
+
+    <main>
+
+      <nav>
+        <%= render 'devise/menu/welcome_items' %>
+      </nav>
+
+      <header>
+        <h1>Personal Manager</h1>
+        <h3>Your daily personal assistant</h3>
+      </header>
+
+      <aside>
+        <h5><%= notice %></h5>
+        <h5><%= alert %></h5>
+      </aside>
+
+    </main>
+
+    <footer>
+      <p>Personal Manager, Copyright ©2019 All rights reserved</p>
+    </footer>
+
     <%= yield %>
   </body>
 </html>

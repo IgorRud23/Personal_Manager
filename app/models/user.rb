@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
 has_many :clients
 has_many :schedules
-has_many :gym_lists through: :schedules
+has_many :gym_lists, through: :schedules
 accepts_nested_attributes_for :clients
 accepts_nested_attributes_for :schedules
 
