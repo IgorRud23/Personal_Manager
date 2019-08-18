@@ -1,0 +1,33 @@
+<h1>Edit Client</h1>
+
+<%= render partial: 'errors_forms' %>
+<%= form_for @client, url: user_client_path(@client.user_id, @client) do |f| %>
+
+<%= f.hidden_field :user_id %>
+<%= f.label :name %>
+<%= f.text_field :name %>
+<br>
+<br>
+
+<%= f.label :gender %>
+<%= f.select :gender, Client.allowed_genders %>
+<br>
+<br>
+
+<%= f.label :height %>
+<%= f.number_field :height %>
+<br>
+<br>
+
+<%= f.label :weight %>
+<%= f.number_field :weight %>
+<br>
+<br>
+
+<%= f.label :age %>
+<%= f.number_field :age %>
+<br>
+<br>
+
+<%= f.submit %>
+<% end %>

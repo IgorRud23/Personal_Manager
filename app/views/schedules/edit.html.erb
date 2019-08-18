@@ -1,0 +1,25 @@
+<h1>Change Training Schedule</h1>
+<%= render partial: 'errors_forms' %>
+
+<%= form_for @schedule, url: user_schedule_path(@schedule.user_id, @schedule) do |f| %>
+<%= f.hidden_field :user_id, value: current_user.id %>
+
+<%= f.label :client %>
+<%= f.collection_select :client_id, current_user.client, :id, :name %>
+<br><br>
+
+<%= f.label :gym_list %>
+<%= f.collection_select :gym_list_id, GymList.all, :id, :name %>
+<br><br>
+
+<%= f.label :exercise_type %>
+<%= f.select :exercise_type, Schedule.exercise_type %>
+<br><br>
+
+<%= f.label :date_day %>
+<%= f.datetime_select :date_day %>
+<br><br>
+
+
+<%= f.submit %>
+<% end %>

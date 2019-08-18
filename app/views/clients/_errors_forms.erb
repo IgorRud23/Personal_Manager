@@ -1,0 +1,17 @@
+<% if @client.errors.any? %>
+<section>
+  <h2>
+    <%= pluralize(@client.errors.count, "error") %>
+    banned this post from being saved:
+  </h2>
+
+  <ul>
+    <% @client.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</section>
+
+
+
+<% end %>

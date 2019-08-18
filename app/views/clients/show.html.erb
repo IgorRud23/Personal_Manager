@@ -1,0 +1,25 @@
+<h4>
+  <%= link_to 'Remove Client', user_client_path(@client.user_id, @client), method: :delete, data: { confirm: "Are You Sure?" } %>
+</h4>
+
+<h4>
+  <%= link_to 'Edit Client', edit_user_client_path(@client.user_id, @client) %>
+</h4>
+
+<h4>
+  <%= link_to 'New Client', new_user_client_path(@user) %>
+</h4>
+
+<br>
+
+<ul>
+  <li>
+    <h3><%= @client.name %></h3>
+    <div>
+      <p> Gender: <%= @client.gender %> </p>
+      <p> Age: <%= @client.age %> years</p>
+      <p> Weight: <%= @client.weight %> cm</p>
+      <p> Height: <%= @client.height %> kg</p>
+    </div>
+  </li>
+</ul>

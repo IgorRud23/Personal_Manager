@@ -1,0 +1,15 @@
+<% if @schedule.errors.any? %>
+<section>
+  <h2>
+    <%= pluralize(@schedule.errors.count, 'error') %>
+    banned this post from being saved:
+  </h2>
+
+  <ul>
+    <% @schedule.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</section>
+
+<% end %>

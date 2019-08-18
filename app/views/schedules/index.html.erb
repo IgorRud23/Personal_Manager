@@ -1,0 +1,23 @@
+<% if !@user.has_schedules %>
+
+<h4>
+  <%= link_to 'New Schedule', new_user_schedule_path(@user) %>
+</h4>
+<br>
+
+<h3>You Currently Do Not Have Any Schedule</h3>
+<h5>Click 'Add Schedule' to create new one!</h5>
+<br>
+
+<% else %>
+<h2>Your Schedules:</h2>
+<h4>
+  <%= link_to 'New Schedule', new_user_schedule_path(@user) %>
+</h4>
+<br>
+
+<% @schedules.each do |schedule| %>
+<h6>Personal Training for: <%= schedule.client.name %></h6>
+<time>Date/Time: <%= schedule.date_time.strftime('%b %e, %l:%M %p') %></time>
+<% end %>
+<% end %>

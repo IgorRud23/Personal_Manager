@@ -18,6 +18,10 @@ class Client < ApplicationRecord
   belongs_to :user
   has_many :schedules, through: :user
 
+  def self.allowed_genders
+    %w[Male Female]
+  end
+
 #scope :order_by, ->(attr) { order("#{attr} DESC") } - sortye v alfavitnomy porydky
 
 end
