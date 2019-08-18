@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
-  root 'user#show'
+  root 'users#show'
   devise_for :users
 
-  resources :users
+  #resources :users
 
   resources :users, only: [:show] do
-    resources :clients  
+    resources :clients
   end
 
   resources :users, only: [:show] do
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   end
 
   resources :schedules
-  resources :gym_list
+  resources :gym_lists
   resources :clients
 
 

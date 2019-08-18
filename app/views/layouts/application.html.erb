@@ -2,7 +2,7 @@
 <html lang="en-US">
   <head>
     <meta charset="utf-8">
-    
+
     <title>Personal Manager</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -31,10 +31,11 @@
 
     </main>
 
+
+
+    <%= yield %>
     <footer>
       <p>Personal Manager, Copyright ©2019 All rights reserved</p>
     </footer>
-
-    <%= yield %>
   </body>
 </html>

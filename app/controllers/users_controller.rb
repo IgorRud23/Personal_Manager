@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_actin :user
+  before_action :user
 
   def show
   end
