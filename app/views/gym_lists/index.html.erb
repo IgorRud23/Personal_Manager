@@ -1,0 +1,9 @@
+<h2>Yours GYM</h2>
+<br>
+<div>
+<% @gym_lists.each do |gym|%>
+<h2><%= gym.name %></h2>
+  <p><%= gym.location %></p>
+  <br>
+  <% end %>
+</div>

@@ -10,6 +10,8 @@ accepts_nested_attributes_for :schedules
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  devise :omniauthable, omniauth_providers: [:facebook]
 #have to install face_book omniauth for gem
 
 def self.from_omniauth(auth)

@@ -1,0 +1,21 @@
+<h4>
+  <%= link_to 'Cancel Training', user_schedule_path(@schedule.user_id, @schedule), method: :delete, data: {confirm: 'Are You Sure?'} %>
+</h4>
+
+<h4>
+  <%= link_to 'New Training', new_user_schedule_path(@user) %>
+</h4>
+
+<h4>
+<%= link_to 'Change Schedule', edit_user_schedule_path(@schedule.user_id, @schedule) %>
+</h4>
+<br><br>
+
+<div>
+  <h5>Training for: <%= @schedule.client.name %></h5>
+  <h5>Date/Time: <%= @schedule.date_day.strftime('%b %e, %l:%M %p') %></h5>
+  <h5>Exercise Type: <%= @schedule.exercise_type %></h5>
+  <h5>Gym Name: <%= @schedule.gym_list.name %></h5>
+  <h5>Location: <%= @schedule.gym_list.location %></h5>
+
+</div>

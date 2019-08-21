@@ -17,7 +17,10 @@
 <br>
 
 <% @schedules.each do |schedule| %>
-<h6>Personal Training for: <%= schedule.client.name %></h6>
-<time>Date/Time: <%= schedule.date_time.strftime('%b %e, %l:%M %p') %></time>
+<h4>Personal Training for: <%= schedule.client.name %></h4>
+<time>Date/Time: <%= schedule.date_day.strftime('%b %e, %l:%M %p') %></time>
+<h4>
+<%= link_to 'Change Schedule', edit_user_schedule_path(schedule.user_id, schedule) %>
+</h4>
 <% end %>
 <% end %>

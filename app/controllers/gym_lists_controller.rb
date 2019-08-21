@@ -1,7 +1,7 @@
 class GymListsController < ApplicationController
 
   def index
-    @gym_list = GymList.all
+    @gym_lists = GymList.all
   end
 
 end
