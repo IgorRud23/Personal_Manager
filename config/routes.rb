@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   root 'users#show'
-  devise_for :users
+  devise_for :users, controllers: {omniauth_callbacks: 'callbacks'}
 
   resources :users
 

@@ -22,6 +22,5 @@ class Client < ApplicationRecord
     %w[Male Female]
   end
 
-#scope :order_by, ->(attr) { order("#{attr} DESC") } - sortye v alfavitnomy porydky
-
+  default_scope { order(name: :asc) }
 end
