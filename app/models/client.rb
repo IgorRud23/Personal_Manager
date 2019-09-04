@@ -23,4 +23,5 @@ class Client < ApplicationRecord
   end
 
   default_scope { order(name: :asc) }
+
 end

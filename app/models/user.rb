@@ -28,4 +28,6 @@ def has_schedules
   !schedules.empty?
 end
 
+scope :max_clients, -> {Client.group(:user_id).count(:id).sort_by {|k, v| v}.last}
+
 end

@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
+
   root 'users#show'
   devise_for :users, controllers: {omniauth_callbacks: 'callbacks'}
-
+#get '/users/most', to: 'users#most_clients'
   resources :users
 
   resources :users, only: [:show] do
@@ -16,6 +17,10 @@ Rails.application.routes.draw do
   resources :schedules
   resources :gym_lists
   resources :clients
+
+
+
+
 
 
 
