@@ -1,9 +1,15 @@
 class ClientsController < ApplicationController
 
+skip_before_action :verify_authenticity_token
+
   def index
     if params[:user_id]
       @user = User.find(params[:user_id])
       @clients = User.find(params[:user_id]).clients
+      respond_to do |format|
+        format.html
+        format.json { render json: @clients}
+      end
     else
       redirect_to user_clients_path
     end
@@ -11,11 +17,11 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new(client_params)
+    @client.user = current_user
     if @client.save
-      @user = current_user
-      redirect_to user_client_path(@user, @client)
+      render json: @client
     else
-      render :new
+      render json: {status: "error", code: 400, message: [@pet.errors.full_messages]}
     end
   end
 
@@ -31,6 +37,10 @@ class ClientsController < ApplicationController
   def show
     @client = client
     @user = current_user
+    respond_to do |format|
+      format.html
+      format.json {render json: @client}
+    end 
   end
 
   def update
