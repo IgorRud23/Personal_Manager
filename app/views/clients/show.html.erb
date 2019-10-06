@@ -1,25 +1,30 @@
 <h4>
-  <%= link_to 'Remove Client', user_client_path(@client.user_id, @client), method: :delete, data: { confirm: "Are You Sure?" } %>
-</h4>
-
-<h4>
   <%= link_to 'Edit Client', edit_user_client_path(@client.user_id, @client) %>
 </h4>
-
-<h4>
-  <%= link_to 'New Client', new_user_client_path(@user) %>
-</h4>
-
 <br>
 
-<ul>
-  <li>
-    <h3><%= @client.name %></h3>
-    <div>
-      <p> Gender: <%= @client.gender %> </p>
-      <p> Age: <%= @client.age %> years</p>
-      <p> Weight: <%= @client.weight %> kg</p>
-      <p> Height: <%= @client.height %> cm</p>
-    </div>
-  </li>
-</ul>
+<div id='clientContainer' data-user_id="<%= current_user.id %>" data-client_id="<%= @client.id %>">
+</div>
+<script>
+  (function() {
+    const {user_id, client_id} = document.getElementById('clientContainer').dataset;
+
+    const checkStatus = response =>
+      (response.status === 200)
+      ? Promise.resolve(response)
+      : Promise.reject(new Error(response.statusText));
+
+    fetch(`http://localhost:3000/users/${user_id}/clients/${client_id}.json`)
+    .then(checkStatus)
+    .then(res => res.json())
+    .then(data => {
+      const {id, name, gender, age, weight, height, schedules, user} = data;
+
+      new Client(id, name, gender, age, weight, height, schedules, user);
+    })
+    .catch(err => {
+      console.log(err);
+      alert('Has some issues to handle your request.');
+    });
+  })()
+</script>

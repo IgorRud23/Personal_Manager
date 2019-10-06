@@ -18,10 +18,12 @@
   <h4>
     <%= link_to 'New Client', new_user_client_path(@user)%>
   </h4>
-
   <br>
 
-  <nav>
+  <div id='clientContainer' data-user_id="<%= current_user.id %>">
+  </div>
+
+  <!-- <nav>
     <ul>
       <% @clients.each do |client|%>
         <li>
@@ -31,7 +33,7 @@
         </li>
       <% end %>
     </ul>
-  </nav>
+  </nav> -->
 
 </section>
 <% end %>
