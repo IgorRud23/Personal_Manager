@@ -1,39 +1,105 @@
-<% if !@user.has_clients%>
+<h2>Your Clients!</h2>
 
-<section>
+<form id="new-client_form" data-user_id="<%= current_user.id %>">
+  <fieldset>
+    <legend>New CLIENT:</legend>
 
-  <h2>You currently do not have any clients</h2>
-  <p>Click Add Client to add new one!</p>
-  <h4>
-    <%= link_to 'Add Client', new_user_client_path(@user)%>
-  </h4>
-  <br>
+    <label for="new-client_name">Name</label>
+    <input type="text" id="new-client_name" minlength="3" maxlength="22" required><br/><br/>
 
-</section>
+    <label for="new-client_gender">Gender</label>
+    <select id="new-client_gender" value="Male">
+      <option value="Male">Male</option>
+      <option value="Male">Female</option>
+    </select><br/><br/>
 
-<% else %>
+    <label for="new-client_height">Height</label>
+    <input type="number" id="new-client_height" min="60" max="300" required><br/><br/>
 
-<section>
-  <h2>Your Clients!</h2>
-  <h4>
-    <%= link_to 'New Client', new_user_client_path(@user)%>
-  </h4>
-  <br>
+    <label for="new-client_weight">Weight</label>
+    <input type="number" id="new-client_weight" min="60" max="300" required><br/><br/>
 
-  <div id='clientContainer' data-user_id="<%= current_user.id %>">
-  </div>
+    <label for="new-client_age">Age</label>
+    <input type="number" id="new-client_age" min="60" max="300" required><br/><br/>
 
-  <!-- <nav>
-    <ul>
-      <% @clients.each do |client|%>
-        <li>
-          <h3>
-            <%= link_to client.name, user_client_path(@user, client) %>
-          </h3>
-        </li>
-      <% end %>
-    </ul>
-  </nav> -->
+    <button id="new-client_create">CREATE</button>
+  </fieldset>
+</form>
 
-</section>
-<% end %>
+<div id='clientContainer' data-user_id="<%= current_user.id %>">
+</div>
+
+<script>
+    const checkStatus = response =>
+      (response.status === 200)
+      ? Promise.resolve(response)
+      : Promise.reject(new Error(response.statusText));
+
+    const handleError = err => {
+      console.error(err);
+      alert('Has some issues to handle your request.');
+    };
+</script>
+
+<script>
+
+  (function(){
+    const createBt = document.getElementById('new-client_create');
+
+    const handleCreate = event => {
+      const clientForm = document.getElementById('new-client_form');
+      if (!clientForm.checkValidity()) return;
+      event.preventDefault();
+
+      const data = {
+        name: document.getElementById('new-client_name').value,
+        gender: document.getElementById('new-client_gender').value,
+        height: Number(document.getElementById('new-client_height').value),
+        weight: Number(document.getElementById('new-client_weight').value),
+        age: Number(document.getElementById('new-client_age').value),
+      };
+    const userId = clientForm.dataset.user_id;
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    };
+
+      fetch(`http://localhost:3000/users/${userId}/clients`, options)
+      .then(checkStatus)
+      .then(res => res.json())
+      .then(client => {
+        const {id, name, gender, age, weight, height, schedules, user} = client;
+
+        new Client(id, name, gender, age, weight, height, schedules, user);
+        clientForm.reset();
+        })
+      .catch(handleError);
+    };
+
+    createBt.addEventListener('click', handleCreate);
+  })()
+
+</script>
+
+<script>
+
+  (function(){
+    const userID = document.getElementById('clientContainer').dataset.user_id;
+
+    fetch(`http://localhost:3000/users/${userID}/clients.json`)
+    .then(checkStatus)
+    .then(res => res.json())
+    .then(data => {
+      data.forEach(client => {
+        const {id, name, gender, age, weight, height, schedules, user} = client;
+
+        new Client(id, name, gender, age, weight, height, schedules, user);
+      })
+    })
+    .catch(handleError);
+  })()
+
+</script>

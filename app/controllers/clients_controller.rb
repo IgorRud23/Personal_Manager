@@ -40,7 +40,7 @@ skip_before_action :verify_authenticity_token
     respond_to do |format|
       format.html
       format.json {render json: @client}
-    end 
+    end
   end
 
   def update
@@ -72,7 +72,6 @@ skip_before_action :verify_authenticity_token
 
   def destroy
     client.destroy
-    redirect_to root_path
   end
 
   private

@@ -5,6 +5,8 @@
 
 <div id='clientContainer' data-user_id="<%= current_user.id %>" data-client_id="<%= @client.id %>">
 </div>
+
+
 <script>
   (function() {
     const {user_id, client_id} = document.getElementById('clientContainer').dataset;
@@ -20,7 +22,7 @@
     .then(data => {
       const {id, name, gender, age, weight, height, schedules, user} = data;
 
-      new Client(id, name, gender, age, weight, height, schedules, user);
+      new Client(id, name, gender, age, weight, height, schedules, user, true);
     })
     .catch(err => {
       console.log(err);
