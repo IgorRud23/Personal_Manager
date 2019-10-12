@@ -14,8 +14,6 @@ class SchedulesController < ApplicationController
     if @schedule.save
       @user = current_user
       redirect_to user_schedule_path(@user, @schedule)
-    else
-      render :new
     end
   end
 

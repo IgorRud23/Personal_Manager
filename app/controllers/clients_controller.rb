@@ -7,7 +7,7 @@ skip_before_action :verify_authenticity_token
       @user = User.find(params[:user_id])
       @clients = User.find(params[:user_id]).clients
       respond_to do |format|
-        format.html
+        format.html { render :index}
         format.json { render json: @clients}
       end
     else
@@ -38,7 +38,7 @@ skip_before_action :verify_authenticity_token
     @client = client
     @user = current_user
     respond_to do |format|
-      format.html
+      format.html {render :show}
       format.json {render json: @client}
     end
   end

@@ -30,6 +30,10 @@
 </div>
 
 <script>
+  (function(){
+    const createBt = document.getElementById('new-client_create');
+
+
     const checkStatus = response =>
       (response.status === 200)
       ? Promise.resolve(response)
@@ -39,14 +43,9 @@
       console.error(err);
       alert('Has some issues to handle your request.');
     };
-</script>
-
-<script>
-
-  (function(){
-    const createBt = document.getElementById('new-client_create');
 
     const handleCreate = event => {
+      console.log('Client has been born');
       const clientForm = document.getElementById('new-client_form');
       if (!clientForm.checkValidity()) return;
       event.preventDefault();
@@ -88,6 +87,16 @@
 
   (function(){
     const userID = document.getElementById('clientContainer').dataset.user_id;
+
+    const checkStatus = response =>
+      (response.status === 200)
+      ? Promise.resolve(response)
+      : Promise.reject(new Error(response.statusText));
+
+    const handleError = err => {
+      console.error(err);
+      alert('Has some issues to handle your request.');
+    };
 
     fetch(`http://localhost:3000/users/${userID}/clients.json`)
     .then(checkStatus)

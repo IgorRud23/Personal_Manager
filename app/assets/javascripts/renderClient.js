@@ -43,23 +43,26 @@ class Client {
           ? `
           <button id="${this.id}_button">Delete</button>
           <br/><br/>
-          <a href='http://localhost:3000/users/2/clients/${this.id}'> Show INFO</a>
+          <a href='http://localhost:3000/users/${this.user.id}/clients/${this.id}'> Show INFO</a>
           `
           : ''
         }
 
-        <div>
-          ${this.schedules.map(schedule =>
-          `
-            <h6>Exercise Type: ${schedule.exercise_type}</h6>
-            <span>Date: ${new Date(schedule.date_day).toLocaleDateString()}</span>
-          `).join('')}
-        </div>
+
         <hr/>
       </section>
     `
   }
 }
+
+// <div>
+//   ${this.schedules.map(schedule =>
+//   `
+//     <h6>Exercise Type: ${schedule.exercise_type}</h6>
+//     <span>Date: ${new Date(schedule.date_day).toLocaleDateString()}</span>
+//   `).join('')}
+// </div>
+
 
 Client.prototype.deleteClient = function() {
   const user_id = document.getElementById('clientContainer').dataset.user_id;
