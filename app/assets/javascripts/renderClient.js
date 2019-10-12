@@ -59,18 +59,18 @@ class Client {
       </section>
     `
   }
+}
 
-  deleteClient(){
-    const user_id = document.getElementById('clientContainer').dataset.user_id;
+Client.prototype.deleteClient = function() {
+  const user_id = document.getElementById('clientContainer').dataset.user_id;
 
-    fetch(`http://localhost:3000/users/${user_id}/clients/${this.id}`, {method: 'DELETE'})
-      .then(() => {
-        const clientEl = document.getElementById(`${this.id}_client`);
-        clientEl.remove();
-      })
-      .catch(err => {
-        console.log(err);
-        alert('Has some issues to handle your request.');
-      });
-  }
+  fetch(`http://localhost:3000/users/${user_id}/clients/${this.id}`, {method: 'DELETE'})
+    .then(() => {
+      const clientEl = document.getElementById(`${this.id}_client`);
+      clientEl.remove();
+    })
+    .catch(err => {
+      console.log(err);
+      alert('Has some issues to handle your request.');
+    });
 }
