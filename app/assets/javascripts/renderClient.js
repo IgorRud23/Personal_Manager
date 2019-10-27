@@ -1,4 +1,5 @@
 class Client {
+  //[x]Makes use of ES6 features as much as possible(Constructor Functions)
   constructor(id, name, gender, age, weight, height, schedules, user, isInfo){
     this.id = id,
     this.name = name,
@@ -55,15 +56,7 @@ class Client {
   }
 }
 
-// <div>
-//   ${this.schedules.map(schedule =>
-//   `
-//     <h6>Exercise Type: ${schedule.exercise_type}</h6>
-//     <span>Date: ${new Date(schedule.date_day).toLocaleDateString()}</span>
-//   `).join('')}
-// </div>
-
-
+//[x] At least one of the JS Model Objects must have a method on the prototype.
 Client.prototype.deleteClient = function() {
   const user_id = document.getElementById('clientContainer').dataset.user_id;
 

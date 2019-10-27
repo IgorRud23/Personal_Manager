@@ -22,6 +22,7 @@ class Client < ApplicationRecord
     %w[Male Female]
   end
 
-  default_scope { order(name: :asc) }
+#clients sort method :ask = alphabet order, :desc = in reverce 
+  #default_scope { order(name: :desc) }
 
 end

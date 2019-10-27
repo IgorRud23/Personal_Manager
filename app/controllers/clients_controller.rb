@@ -21,7 +21,7 @@ skip_before_action :verify_authenticity_token
     if @client.save
       render json: @client
     else
-      render json: {status: "error", code: 400, message: [@pet.errors.full_messages]}
+      render json: {status: "error", code: 400, message: [@client.errors.full_messages]}
     end
   end
 

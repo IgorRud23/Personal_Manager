@@ -20,14 +20,32 @@
     <input type="number" id="new-client_weight" min="60" max="300" required><br/><br/>
 
     <label for="new-client_age">Age</label>
-    <input type="number" id="new-client_age" min="60" max="300" required><br/><br/>
+    <input type="number" id="new-client_age" min="8" max="100" required><br/><br/>
 
-    <button id="new-client_create">CREATE</button>
+    <button id="new-client_create">Submitted</button>
   </fieldset>
 </form>
 
-<div id='clientContainer' data-user_id="<%= current_user.id %>">
+<div id='schedulesContainer' style='border: 2px solid #666; padding: 12px; margin: 6px 0'>
+  <h1>Schedules:</h1>
 </div>
+<div id='clientContainer' data-user_id="<%= current_user.id %>" style='border: 1px solid #666; padding: 12px'>
+</div>
+<button id="sort_button">Sort</button>
+
+<script>
+const sortButton = document.getElementById('sort_button');
+sortButton.addEventListener('click', sorting);
+
+function sorting(){
+  const clientsContainer = document.getElementById('clientContainer');
+  const listOfElements = [...clientsContainer.children].sort((a, b) => a.textContent.localeCompare(b.textContent));
+
+ clientsContainer.innerHTML = '';
+
+ listOfElements.forEach(client => clientsContainer.appendChild(client))
+}
+</script>
 
 <script>
   (function(){
@@ -48,7 +66,7 @@
       console.log('Client has been born');
       const clientForm = document.getElementById('new-client_form');
       if (!clientForm.checkValidity()) return;
-      event.preventDefault();
+      event.preventDefault(); //prevent send request to the server
 
       const data = {
         name: document.getElementById('new-client_name').value,
@@ -80,13 +98,12 @@
 
     createBt.addEventListener('click', handleCreate);
   })()
-
 </script>
 
 <script>
-
   (function(){
     const userID = document.getElementById('clientContainer').dataset.user_id;
+    const schedulesContainer = document.getElementById('schedulesContainer');
 
     const checkStatus = response =>
       (response.status === 200)
@@ -102,13 +119,28 @@
     .then(checkStatus)
     .then(res => res.json())
     .then(data => {
+
+      // Render Schedules list
+      //[x]Your Rails application must reveal at least one `has-many` relationship through JSON that is then rendered to the page.
+console.log(data);
+
+if (data.length) {
+
+      data[0].schedules.forEach(schedule => {
+        schedulesContainer.innerHTML += `
+          <h3> ${schedule.date_day} <sup>${schedule.exercise_type}</sup> </h3>
+        `
+      });
+    }
+
+      // Render Client list
+      //[x]Must render at least one index page (index resource - 'list of things') via JavaScript and an Active Model Serialization JSON Backend.
+
       data.forEach(client => {
         const {id, name, gender, age, weight, height, schedules, user} = client;
-
         new Client(id, name, gender, age, weight, height, schedules, user);
       })
     })
     .catch(handleError);
   })()
-
 </script>
